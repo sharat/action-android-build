@@ -8,6 +8,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
     build-essential \
     zip \
     unzip \
+    sudo
 
 # Install Default JDK
 RUN apt-get -y install default-jdk
@@ -32,3 +33,5 @@ RUN cd /opt \
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
 
 RUN yes | sdkmanager  --licenses
+
+RUN apt-get clean
