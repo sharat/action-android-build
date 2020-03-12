@@ -44,4 +44,6 @@ RUN apt-get -y install gradle && gradle -v
 
 RUN yes | sdkmanager  --licenses
 
+RUN sdkmanager --install "ndk;20.0.5594570"
+
 RUN apt-get clean
