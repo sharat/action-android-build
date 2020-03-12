@@ -1,3 +1,3 @@
-# docker-android-build
+# Docker Image for Android SDK 29 Build
 
-Docker Build environment based on R29 SDK
+This is an experimental project. Not recommended for public use. Docker Build environment based on R29 SDK
