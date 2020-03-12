@@ -11,8 +11,7 @@ on:
       - v*
 
 env:
-  IMAGE_NAME: sarathc/android-build
-  VERSION: latest
+  IMAGE_NAME: sarathc/android-build:latest
 
 jobs:
   # Push image to GitHub Packages.
@@ -25,18 +24,12 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build image
-        run: docker build . --file Dockerfile --tag image
+        run: docker build . --file Dockerfile --tag $IMAGE_NAME
 
       - name: Log into registry
         run: echo "${{ secrets.GH_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
       - name: Push image
         run: |
-          
           IMAGE_ID=docker.pkg.github.com/$IMAGE_NAME
-
-          echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$VERSION
-
-          docker tag image $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+          docker push $IMAGE_ID
