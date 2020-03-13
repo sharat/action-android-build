@@ -8,11 +8,17 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get -y install \
     build-essential \
     zip \
     unzip \
-    sudo
+    sudo \
+    tree
 
-# Install node-lts
+# Install node-lts, firebase tools
 RUN curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 RUN apt-get install -y nodejs
+RUN npm install -g firebase-tools
+
+# Install Ruby and Fastlane
+RUN apt-get install ruby-full
+RUN gem install fastlane
 
 # Install Default JDK
 RUN apt-get install -y openjdk-8-jdk
