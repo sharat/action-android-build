@@ -47,3 +47,5 @@ RUN yes | sdkmanager  --licenses
 RUN sdkmanager --install "ndk;20.0.5594570"
 
 RUN apt-get clean
+
+ENTRYPOINT [ "./entrypoint.sh" ]

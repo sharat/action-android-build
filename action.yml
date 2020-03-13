@@ -1,1 +1,11 @@
+name: Android Build
+description: Android Build with NDK 20, 21
+author: Sarath C (github/sharat)
 
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
+branding:
+  icon: zap
+  color: 'green'
