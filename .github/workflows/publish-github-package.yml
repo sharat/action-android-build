@@ -78,7 +78,7 @@ jobs:
 
       - name: Push image to GitHub Packages
         run: |
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
+          IMAGE_ID={{ secrets.DOCKER_HUB_USERNAME }}/$IMAGE_NAME
 
           # Strip git ref prefix from version
           VERSION=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
