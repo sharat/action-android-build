@@ -17,7 +17,7 @@ RUN apt-get install -y nodejs
 RUN npm install -g firebase-tools
 
 # Install Ruby and Fastlane
-RUN apt-get install ruby-full
+RUN apt-get install -y ruby-full
 RUN gem install fastlane
 
 # Install Default JDK
