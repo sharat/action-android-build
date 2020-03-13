@@ -48,4 +48,5 @@ RUN sdkmanager --install "ndk;20.0.5594570"
 
 RUN apt-get clean
 
+COPY entrypoint.sh /
 ENTRYPOINT [ "./entrypoint.sh" ]
