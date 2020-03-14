@@ -19,16 +19,16 @@ jobs:
 
       - name: Find Release ID by release tag
         run: |
-          export RELEASE_ID=$(
+          export RELEASE_ID=$( \
             curl -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' \
             -X GET \
-            https://api.github.com//repos/$GITHUB_REPOSITORY/releases/tags/$RELASE_TAG \
-            | jq ".id" \
+            https://api.github.com/repos/$GITHUB_REPOSITORY/releases/tags/$RELASE_TAG \
+            | jq .id
           )
-          echo Found Release: $RELEASE_ID 
+          echo Found Release: $RELEASE_ID
 
       - name: Delete existing release
         run: |
           curl -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' \
           -X DELETE \
-          https://api.github.com//repos/$GITHUB_REPOSITORY/releases/tag/$RELEASE_ID
+          https://api.github.com/repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID
