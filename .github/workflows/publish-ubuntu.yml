@@ -7,7 +7,7 @@ on:
 
 env:
   IMAGE_NAME: android-build
-  VERSION: latest 
+  BASE_IMAGE: ubuntu
 
 jobs:
 
@@ -30,10 +30,8 @@ jobs:
           IMAGE_ID=${{ secrets.DOCKER_HUB_USERNAME }}/$IMAGE_NAME
 
           echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$VERSION
-
-          docker tag image $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+          docker tag image $IMAGE_ID:$BASE_IMAGE
+          docker push $IMAGE_ID:$BASE_IMAGE
 
 
       - name: Log into registry
@@ -44,7 +42,5 @@ jobs:
           IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
 
           echo IMAGE_ID=$IMAGE_ID
-          echo VERSION=$VERSION
-
-          docker tag image $IMAGE_ID:$VERSION
-          docker push $IMAGE_ID:$VERSION
+          docker tag image $IMAGE_ID:$BASE_IMAGE
+          docker push $IMAGE_ID:$BASE_IMAGE
