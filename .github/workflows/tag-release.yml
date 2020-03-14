@@ -1,0 +1,22 @@
+name: Tag Release
+
+on:
+  push:
+    # Publish `master` as Docker `latest` image.
+    branches:
+      - master
+env:
+  RELEASE_ID: v1
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Delete existing release
+        run: |
+          curl -H 'Authorization: token {{ secrets.GITHUB_TOKEN }} https://api.github.com//repos/${{GITHUB_REPOSITORY}}/releases/$RELEASE_ID
+
