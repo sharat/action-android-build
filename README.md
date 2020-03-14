@@ -12,3 +12,11 @@ uses: sharat/action-android-build
 with:
   args: './gradlew assembleDebug'
 ```
+
+## Docker Images
+Using action will cause the entire image to be rebuilt. This will take considerable time. You may pull the docker image published under the packages, or under docker hub.
+
+| Docker Hub Image            | Base           |
+|-----------------------------|----------------|
+| sarathc/androidbuild:alpine | ubuntu:bionic  |
+| sarathc/androidbuild:ubuntu | openjdk:alpine |
