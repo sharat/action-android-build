@@ -2,9 +2,10 @@ name: Ubuntu
 
 on:
   push:
-    # Publish `master` as Docker `latest` image.
     branches:
       - master
+    paths:
+      - Dockerfile-alpine
 
 env:
   IMAGE_NAME: android-build
