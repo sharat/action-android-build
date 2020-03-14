@@ -11,12 +11,11 @@ env:
 jobs:
   push:
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
 
     steps:
       - uses: actions/checkout@v2
-
       - name: Delete existing release
         run: |
-          curl -H 'Authorization: token {{ secrets.GITHUB_TOKEN }}' https://api.github.com//repos/${{GITHUB_REPOSITORY}}/releases/$RELEASE_ID
+          curl -H 'Authorization: token {{ secrets.GITHUB_TOKEN }}' \
+          https://api.github.com//repos/${{GITHUB_REPOSITORY}}/releases/$RELEASE_ID
 
