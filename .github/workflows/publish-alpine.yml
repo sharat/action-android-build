@@ -5,6 +5,8 @@ on:
     # Publish `master` as Docker `latest` image.
     branches:
       - master
+    paths:
+      - Dockerfile-alpine
 env:
   IMAGE_NAME: android-build
   BASE_IMAGE: alpine
