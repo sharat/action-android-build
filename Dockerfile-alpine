@@ -7,7 +7,7 @@ RUN apk add curl zip unzip bash nodejs
 # Setup Android SDK
 ENV ANDROID_HOME /.android-sdk-linux
 
-RUN cd ~/ \
+RUN cd $HOME \
     && mkdir $ANDROID_HOME \
     && wget -q https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip -O android-sdk-tools.zip \
     && unzip -q android-sdk-tools.zip -d $ANDROID_HOME \
