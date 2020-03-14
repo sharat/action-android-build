@@ -28,7 +28,6 @@ jobs:
           echo Found Release: $RELEASE_ID 
 
       - name: Delete existing release
-        if: $RELEASE_ID
         run: |
           curl -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' \
           -X DELETE \
