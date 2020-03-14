@@ -17,5 +17,6 @@ jobs:
       - name: Delete existing release
         run: |
           curl -H 'Authorization: token {{ secrets.GITHUB_TOKEN }}' \
-          https://api.github.com//repos/${{GITHUB_REPOSITORY}}/releases/$RELEASE_ID
+          -X DELETE \
+          https://api.github.com//repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID
 
