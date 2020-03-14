@@ -19,20 +19,17 @@ jobs:
 
       - name: Find Release ID by release tag
         run: |
-          export RELEASE_ID=$( \
-            curl -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' \
-            -X GET \
-            https://api.github.com/repos/$GITHUB_REPOSITORY/releases/tags/$RELASE_TAG \
-            | jq .id
-          )
-          [[ -z $RELEASE_ID ]] && echo "Couldn't find a release under the tag $RELASE_TAG" || \
-          curl -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' \
-          -X DELETE \
-          https://api.github.com/repos/$GITHUB_REPOSITORY/releases/$RELEASE_ID
-          echo Deleting Tag: $RELEASE_TAG
-          curl -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' \
-          -X DELETE \
-          https://api.github.com/repos/$GITHUB_REPOSITORY/git/refs/tags/$RELEASE_ID
+          export RELEASE_TAG=v1
+          export GITHUB_REPOSITORY="sharat/action-android-build"
+          export GITHUB_API_REPOS="https://api.github.com/repos/$GITHUB_REPOSITORY"
+          export GITHUB_TOKEN_AUTH="Authorization: token $GITHUB_TOKEN"
+          export RELEASE_DATA=$(curl -X GET --silent -H $GITHUB_TOKEN_AUTH $GITHUB_API_REPOS/releases/tags/$RELEASE_TAG)
+          export RELEASE_URL=$(echo $RELEASE_DATA | jq -r .url) && echo $RELEASE_URL
+          echo $RELEASE_DATA | jq -r .name
+          echo $RELEASE_DATA | jq -r .tag_name
+          echo $RELEASE_DATA | jq -r .url
+          curl -X DELETE --silent -H $GITHUB_TOKEN_AUTH $RELEASE_URL
+          curl -X DELETE --silent -H $GITHUB_TOKEN_AUTH $GITHUB_API_REPOS/git/refs/tags/$RELEASE_TAG
 
       - name: Delete existing release
         run: |
