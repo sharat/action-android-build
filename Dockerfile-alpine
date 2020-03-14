@@ -1,0 +1,35 @@
+FROM openjdk:8-alpine
+
+# Install essential tools
+RUN apk update
+RUN apk add curl zip unzip bash nodejs
+
+# Setup Android SDK
+ENV ANDROID_HOME /.android-sdk-linux
+
+RUN cd ~/ \
+    && mkdir $ANDROID_HOME \
+    && wget -q https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip -O android-sdk-tools.zip \
+    && unzip -q android-sdk-tools.zip -d $ANDROID_HOME \
+    && rm android-sdk-tools.zip
+
+ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/tools/bin:${ANDROID_HOME}/platform-tools
+
+RUN mkdir $HOME/.android \
+    && touch $HOME/.android/repositories.cfg
+
+RUN yes | sdkmanager --update --channel=3
+RUN sdkmanager "tools" "platform-tools"
+RUN yes | sdkmanager \
+    "platforms;android-29" \
+    "build-tools;29.0.2" \
+    "build-tools;29.0.1" \
+    "build-tools;29.0.0" \
+    "extras;android;m2repository" \
+    "extras;google;m2repository" \
+    "extras;google;google_play_services"
+
+RUN yes | sdkmanager  --licenses
+RUN sdkmanager --install "ndk;20.0.5594570"
+
+RUN apk add gradle && gradle -v
