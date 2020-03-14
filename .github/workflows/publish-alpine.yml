@@ -1,4 +1,4 @@
-name: Docker
+name: Alpine
 
 on:
   push:
@@ -14,7 +14,6 @@ on:
   pull_request:
 
 env:
-  # TODO: Change variable to your image's name.
   IMAGE_NAME: android-build
   BASE_IMAGE: alpine
 
