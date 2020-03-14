@@ -33,7 +33,6 @@ jobs:
           curl -H 'Authorization: token ${{ secrets.GITHUB_TOKEN }}' \
           -X DELETE \
           https://api.github.com/repos/$GITHUB_REPOSITORY/git/refs/tags/$RELEASE_ID
-          
 
       - name: Delete existing release
         run: |
