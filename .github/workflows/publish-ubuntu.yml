@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - master
-    paths:
-      - Dockerfile-alpine
 
 env:
   IMAGE_NAME: android-build
